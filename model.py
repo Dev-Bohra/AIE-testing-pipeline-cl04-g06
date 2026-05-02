@@ -32,3 +32,37 @@ y = data[target]
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
+# Scale features
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Train model
+model = LinearRegression()
+model.fit(X_train_scaled, y_train)
+
+# Predictions
+y_pred = model.predict(X_test_scaled)
+
+# Metrics
+mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+# Plot
+plt.figure(figsize=(8,6))
+plt.scatter(y_test, y_pred)
+plt.xlabel("Actual SHI")
+plt.ylabel("Predicted SHI")
+plt.title("Bridge SHI Prediction")
+plt.grid(True)
+plt.savefig("model_results.png")
+
+# Save metrics
+with open("metrics.txt", "w") as f:
+    f.write("Bridge Regression Model Results\n")
+    f.write(f"MSE: {mse:.4f}\n")
+    f.write(f"MAE: {mae:.4f}\n")
+    f.write(f"R2 Score: {r2:.4f}\n")
+
+print("Model completed successfully")
