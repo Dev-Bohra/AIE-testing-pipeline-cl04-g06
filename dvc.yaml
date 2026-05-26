@@ -1,0 +1,49 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess_new_data.py
+    deps:
+      - src/preprocess_new_data.py
+      - data/new_data.csv
+    outs:
+      - artifacts/data/X_train.npy
+      - artifacts/data/y_train.npy
+      - artifacts/data/X_test.npy
+      - artifacts/data/y_test.npy
+      - artifacts/preprocessing/scaler.pkl
+      - artifacts/preprocessing/feature_columns.json
+
+  train:
+    cmd: python src/model.py
+    deps:
+      - src/model.py
+      - artifacts/data/X_train.npy
+      - artifacts/data/y_train.npy
+    outs:
+      - artifacts/models/model.keras
+      - artifacts/metrics/training_history.json
+      - artifacts/metadata/model_version.txt
+      - logs/training.log
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - artifacts/models/model.keras
+      - artifacts/data/X_test.npy
+      - artifacts/data/y_test.npy
+    outs:
+      - artifacts/metrics/evaluation_metrics.json
+      - reports/performance_report.html
+
+  monitor:
+    cmd: python src/monitor.py
+    deps:
+      - src/monitor.py
+      - data/new_data.csv
+      - artifacts/metrics/evaluation_metrics.json
+    outs:
+      - reports/drift_report.json
+      - reports/monitoring_dashboard.html
+      - artifacts/metrics/monitoring_metrics.json
+      - monitoring/alerts/alert_history.txt
+      - monitoring/logs/monitoring.log
