@@ -1,5 +1,8 @@
+dvc
 pandas
 numpy
-matplotlib
-scikit-learn
 tensorflow
+scikit-learn
+joblib
+scipy
+matplotlib
