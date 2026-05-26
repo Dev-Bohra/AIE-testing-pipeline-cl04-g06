@@ -42,8 +42,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Configure DVC remote credentials
+        run: |
+          dvc remote modify origin --local auth basic
+          dvc remote modify origin --local user "${{ secrets.DAGSHUB_USER }}"
+          dvc remote modify origin --local password "${{ secrets.DAGSHUB_TOKEN }}"
+
       - name: Pull DVC data
-        run: dvc pull
+        run: dvc pull data/new_data.csv.dvc
 
       - name: Run DVC retraining pipeline
         run: dvc repro
