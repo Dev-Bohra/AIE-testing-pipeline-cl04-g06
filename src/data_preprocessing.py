@@ -46,12 +46,18 @@ COLS_DROP_MISSING = [
 ]
 
 COLS_DROP_LEAKAGE = [
-    "Bridge_Mood_Meter",
-    "Energy_Harvesting_Potential_W",
-    "Carbon_Footprint_tCO2e_incremental",
-    "Estimated_Repair_Cost_USD_incremental",
+    # Future SHI / target-derived columns
+    "SHI_Predicted_24h_Ahead",
     "SHI_Predicted_7d_Ahead",
     "SHI_Predicted_30d_Ahead",
+    "Bridge_Mood_Meter",
+    # Output / decision columns that would leak target information
+    "Probability_of_Failure_PoF",
+    "Maintenance_Alert",
+    "Estimated_Repair_Cost_USD_incremental",
+    "Carbon_Footprint_tCO2e_incremental",
+    "Energy_Harvesting_Potential_W",
+    # Highly derived / redundant simulated outputs
     "Simulated_Water_Flow_m3s",
     "Axle_Counts_pmin",
     "Air_Quality_Index_AQI",
