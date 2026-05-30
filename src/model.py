@@ -169,21 +169,45 @@ def save_comparison_plot(metrics):
     models = list(metrics.keys())
     rmse_values = [metrics[m]["RMSE"] for m in models]
     mae_values = [metrics[m]["MAE"] for m in models]
-
     x = range(len(models))
-
+    bar_width = 0.4
     plt.figure(figsize=(8, 6))
-    plt.bar(x, rmse_values, width=0.4, label="RMSE")
-    plt.bar([i + 0.4 for i in x], mae_values, width=0.4, label="MAE")
+    rmse_bars = plt.bar(x, rmse_values, width=bar_width, label="RMSE")
+    mae_bars = plt.bar(
+        [i + bar_width for i in x],
+        mae_values,
+        width=bar_width,
+        label="MAE"
+    )
+    # Add value labels above bars as chen requested
+    for bar in rmse_bars:
+        height = bar.get_height()
+        plt.text(
+            bar.get_x() + bar.get_width() / 2,
+            height,
+            f"{height:.6f}",
+            ha="center",
+            va="bottom",
+            fontsize=9
+        )
 
-    plt.xticks([i + 0.2 for i in x], models, rotation=10)
+    for bar in mae_bars:
+        height = bar.get_height()
+        plt.text(
+            bar.get_x() + bar.get_width() / 2,
+            height,
+            f"{height:.6f}",
+            ha="center",
+            va="bottom",
+            fontsize=9
+        )
+    plt.xticks([i + bar_width / 2 for i in x], models, rotation=10)
     plt.ylabel("Error")
     plt.title("Model Comparison: Random Forest vs Neural Network")
     plt.legend()
     plt.tight_layout()
     plt.savefig(COMPARISON_PLOT_PATH)
     plt.close()
-
     log(f"Model comparison plot saved to: {COMPARISON_PLOT_PATH}")
 
 
