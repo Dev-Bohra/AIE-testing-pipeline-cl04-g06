@@ -1,0 +1,10 @@
+2026-05-30 23:09:00,741 - INFO - ============================================================
+2026-05-30 23:09:00,741 - INFO - AUTOMATED MODEL RETRAINING
+2026-05-30 23:09:00,741 - INFO - ============================================================
+2026-05-30 23:09:00,741 - ERROR - Retraining failed.
+Traceback (most recent call last):
+  File "c:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\src\retrain_model.py", line 166, in main
+    check_required_files()
+  File "c:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\src\retrain_model.py", line 59, in check_required_files
+    raise FileNotFoundError(f"Missing required file: {file_path}")
+FileNotFoundError: Missing required file: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\data\new_data.csv

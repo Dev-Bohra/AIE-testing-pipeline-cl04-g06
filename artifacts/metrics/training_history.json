@@ -1,0 +1,21 @@
+{
+    "target": "Structural_Health_Index_SHI",
+    "rows_used": 43200,
+    "features_used": 39,
+    "models_compared": {
+        "RandomForestRegressor": {
+            "MSE": 0.0,
+            "RMSE": 0.0032,
+            "MAE": 0.0016,
+            "R2_Score": 0.9966
+        },
+        "MLPRegressor_NeuralNetwork": {
+            "MSE": 0.0,
+            "RMSE": 0.0032,
+            "MAE": 0.0017,
+            "R2_Score": 0.9965
+        }
+    },
+    "best_model": "RandomForestRegressor",
+    "selection_reason": "Best model selected using lowest RMSE on the test set."
+}

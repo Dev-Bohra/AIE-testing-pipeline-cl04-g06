@@ -1,0 +1,40 @@
+2026-05-30 22:54:02,301 - INFO - ============================================================
+2026-05-30 22:54:02,301 - INFO - BRIDGE SHI MODEL TRAINING
+2026-05-30 22:54:02,301 - INFO - ============================================================
+2026-05-30 22:54:02,789 - INFO - Rows: 43200
+2026-05-30 22:54:02,791 - INFO - Features: 39
+2026-05-30 22:54:02,835 - INFO - Saved X_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_train.npy
+2026-05-30 22:54:02,835 - INFO - Saved X_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_test.npy
+2026-05-30 22:54:02,835 - INFO - Saved y_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_train.npy
+2026-05-30 22:54:02,837 - INFO - Saved y_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_test.npy
+2026-05-30 22:54:02,837 - INFO - Training Random Forest...
+2026-05-30 22:54:35,250 - INFO - Random Forest metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0016, 'R2_Score': 0.9966}
+2026-05-30 22:54:35,250 - INFO - Training Neural Network...
+2026-05-30 22:54:53,435 - INFO - Neural Network metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0017, 'R2_Score': 0.9965}
+2026-05-30 22:54:53,793 - INFO - Model version saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metadata\model_version.txt
+2026-05-30 22:54:54,258 - INFO - Model comparison plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\model_comparison.png
+2026-05-30 22:54:54,633 - INFO - Actual vs predicted plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\best_model_actual_vs_predicted.png
+2026-05-30 22:54:54,640 - INFO - Best model: RandomForestRegressor
+2026-05-30 22:54:54,641 - INFO - Best model saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\models\bridge_model.pkl
+2026-05-30 22:54:54,642 - INFO - Training history saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metrics\training_history.json
+2026-05-30 22:54:54,642 - INFO - Model training complete.
+2026-05-30 22:57:40,635 - INFO - ============================================================
+2026-05-30 22:57:40,635 - INFO - BRIDGE SHI MODEL TRAINING
+2026-05-30 22:57:40,635 - INFO - ============================================================
+2026-05-30 22:57:41,109 - INFO - Rows: 43200
+2026-05-30 22:57:41,109 - INFO - Features: 39
+2026-05-30 22:57:41,151 - INFO - Saved X_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_train.npy
+2026-05-30 22:57:41,151 - INFO - Saved X_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_test.npy
+2026-05-30 22:57:41,151 - INFO - Saved y_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_train.npy
+2026-05-30 22:57:41,151 - INFO - Saved y_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_test.npy
+2026-05-30 22:57:41,151 - INFO - Training Random Forest...
+2026-05-30 22:58:07,933 - INFO - Random Forest metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0016, 'R2_Score': 0.9966}
+2026-05-30 22:58:07,933 - INFO - Training Neural Network...
+2026-05-30 22:58:20,691 - INFO - Neural Network metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0017, 'R2_Score': 0.9965}
+2026-05-30 22:58:20,959 - INFO - Model version saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metadata\model_version.txt
+2026-05-30 22:58:21,313 - INFO - Model comparison plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\model_comparison.png
+2026-05-30 22:58:21,537 - INFO - Actual vs predicted plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\best_model_actual_vs_predicted.png
+2026-05-30 22:58:21,537 - INFO - Best model: RandomForestRegressor
+2026-05-30 22:58:21,537 - INFO - Best model saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\models\bridge_model.pkl
+2026-05-30 22:58:21,537 - INFO - Training history saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metrics\training_history.json
+2026-05-30 22:58:21,537 - INFO - Model training complete.

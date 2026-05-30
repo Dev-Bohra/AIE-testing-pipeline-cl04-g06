@@ -1,9 +1,13 @@
-# Bridge Structural Health Monitoring — Model Training Pipeline
-# Models trained: RandomForestRegressor & MLPRegressor neural network
+"""
+Bridge Structural Health Monitoring — Model Training Pipeline
+"""
 
 from pathlib import Path
+from datetime import datetime
 import json
+import logging
 import joblib
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -17,20 +21,46 @@ ROOT = Path(__file__).resolve().parents[1]
 
 DATA_PATH = ROOT / "data" / "processed" / "bridge_processed.csv"
 
+ARTIFACTS_DATA_DIR = ROOT / "artifacts" / "data"
 MODEL_DIR = ROOT / "artifacts" / "models"
 METRICS_DIR = ROOT / "artifacts" / "metrics"
+METADATA_DIR = ROOT / "artifacts" / "metadata"
+
 REPORTS_DIR = ROOT / "reports"
+MONITORING_LOGS_DIR = ROOT / "monitoring" / "logs"
 
 BEST_MODEL_PATH = MODEL_DIR / "bridge_model.pkl"
 RF_MODEL_PATH = MODEL_DIR / "random_forest_model.pkl"
 MLP_MODEL_PATH = MODEL_DIR / "mlp_model.pkl"
 
-METRICS_PATH = METRICS_DIR / "training_metrics.json"
+TRAINING_HISTORY_PATH = METRICS_DIR / "training_history.json"
+
+MODEL_VERSION_PATH = METADATA_DIR / "model_version.txt"
+TRAINING_LOG_PATH = MONITORING_LOGS_DIR / "training.log"
+
+X_TRAIN_PATH = ARTIFACTS_DATA_DIR / "X_train.npy"
+X_TEST_PATH = ARTIFACTS_DATA_DIR / "X_test.npy"
+Y_TRAIN_PATH = ARTIFACTS_DATA_DIR / "y_train.npy"
+Y_TEST_PATH = ARTIFACTS_DATA_DIR / "y_test.npy"
 
 COMPARISON_PLOT_PATH = REPORTS_DIR / "model_comparison.png"
 BEST_MODEL_PLOT_PATH = REPORTS_DIR / "best_model_actual_vs_predicted.png"
 
 TARGET = "Structural_Health_Index_SHI"
+
+
+MONITORING_LOGS_DIR.mkdir(parents=True, exist_ok=True)
+
+logging.basicConfig(
+    filename=TRAINING_LOG_PATH,
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+
+def log(message):
+    print(message)
+    logging.info(message)
 
 
 def load_data():
@@ -56,6 +86,7 @@ def load_data():
 
 def calculate_metrics(y_true, y_pred):
     mse = mean_squared_error(y_true, y_pred)
+
     return {
         "MSE": round(mse, 4),
         "RMSE": round(mse ** 0.5, 4),
@@ -77,10 +108,6 @@ def train_random_forest(X_train, y_train):
 
 
 def train_neural_network(X_train, y_train):
-    """
-    Lightweight neural network to keep training time reasonable.
-    Early stopping stops training automatically if validation score stops improving.
-    """
     model = MLPRegressor(
         hidden_layer_sizes=(64, 32),
         activation="relu",
@@ -98,6 +125,20 @@ def train_neural_network(X_train, y_train):
     return model
 
 
+def save_numpy_artifacts(X_train, X_test, y_train, y_test):
+    ARTIFACTS_DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    np.save(X_TRAIN_PATH, X_train.to_numpy())
+    np.save(X_TEST_PATH, X_test.to_numpy())
+    np.save(Y_TRAIN_PATH, y_train.to_numpy())
+    np.save(Y_TEST_PATH, y_test.to_numpy())
+
+    log(f"Saved X_train to: {X_TRAIN_PATH}")
+    log(f"Saved X_test to: {X_TEST_PATH}")
+    log(f"Saved y_train to: {Y_TRAIN_PATH}")
+    log(f"Saved y_test to: {Y_TEST_PATH}")
+
+
 def save_json(data, path):
     path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -108,6 +149,18 @@ def save_json(data, path):
 def save_model(model, path):
     path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, path)
+
+
+def save_model_version(best_model_name):
+    METADATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    version_text = f"{best_model_name}_{timestamp}"
+
+    with open(MODEL_VERSION_PATH, "w") as file:
+        file.write(version_text)
+
+    log(f"Model version saved to: {MODEL_VERSION_PATH}")
 
 
 def save_comparison_plot(metrics):
@@ -123,13 +176,15 @@ def save_comparison_plot(metrics):
     plt.bar(x, rmse_values, width=0.4, label="RMSE")
     plt.bar([i + 0.4 for i in x], mae_values, width=0.4, label="MAE")
 
-    plt.xticks([i + 0.2 for i in x], models)
+    plt.xticks([i + 0.2 for i in x], models, rotation=10)
     plt.ylabel("Error")
     plt.title("Model Comparison: Random Forest vs Neural Network")
     plt.legend()
     plt.tight_layout()
     plt.savefig(COMPARISON_PLOT_PATH)
     plt.close()
+
+    log(f"Model comparison plot saved to: {COMPARISON_PLOT_PATH}")
 
 
 def save_actual_vs_predicted_plot(y_test, y_pred, model_name):
@@ -145,16 +200,18 @@ def save_actual_vs_predicted_plot(y_test, y_pred, model_name):
     plt.savefig(BEST_MODEL_PLOT_PATH)
     plt.close()
 
+    log(f"Actual vs predicted plot saved to: {BEST_MODEL_PLOT_PATH}")
+
 
 def main():
-    print("=" * 60)
-    print("BRIDGE SHI MODEL TRAINING")
-    print("=" * 60)
+    log("=" * 60)
+    log("BRIDGE SHI MODEL TRAINING")
+    log("=" * 60)
 
     X, y = load_data()
 
-    print(f"Rows: {X.shape[0]}")
-    print(f"Features: {X.shape[1]}")
+    log(f"Rows: {X.shape[0]}")
+    log(f"Features: {X.shape[1]}")
 
     X_train, X_test, y_train, y_test = train_test_split(
         X,
@@ -163,26 +220,25 @@ def main():
         random_state=42
     )
 
-    print("\nTraining Random Forest...")
+    save_numpy_artifacts(X_train, X_test, y_train, y_test)
+
+    log("Training Random Forest...")
     rf_model = train_random_forest(X_train, y_train)
     rf_pred = rf_model.predict(X_test)
     rf_metrics = calculate_metrics(y_test, rf_pred)
+    log(f"Random Forest metrics: {rf_metrics}")
 
-    print("Random Forest metrics:", rf_metrics)
-
-    print("\nTraining Neural Network...")
+    log("Training Neural Network...")
     mlp_model = train_neural_network(X_train, y_train)
     mlp_pred = mlp_model.predict(X_test)
     mlp_metrics = calculate_metrics(y_test, mlp_pred)
-
-    print("Neural Network metrics:", mlp_metrics)
+    log(f"Neural Network metrics: {mlp_metrics}")
 
     all_metrics = {
         "RandomForestRegressor": rf_metrics,
         "MLPRegressor_NeuralNetwork": mlp_metrics
     }
 
-    # Select best model by lowest RMSE
     if rf_metrics["RMSE"] <= mlp_metrics["RMSE"]:
         best_model = rf_model
         best_model_name = "RandomForestRegressor"
@@ -205,16 +261,16 @@ def main():
     save_model(mlp_model, MLP_MODEL_PATH)
     save_model(best_model, BEST_MODEL_PATH)
 
-    save_json(final_report, METRICS_PATH)
+    save_json(final_report, TRAINING_HISTORY_PATH)
+    save_model_version(best_model_name)
 
     save_comparison_plot(all_metrics)
     save_actual_vs_predicted_plot(y_test, best_predictions, best_model_name)
 
-    print("\nBest model:", best_model_name)
-    print(f"Best model saved to: {BEST_MODEL_PATH}")
-    print(f"Metrics saved to: {METRICS_PATH}")
-    print(f"Reports saved to: {REPORTS_DIR}")
-    print("\nModel training complete.")
+    log(f"Best model: {best_model_name}")
+    log(f"Best model saved to: {BEST_MODEL_PATH}")
+    log(f"Training history saved to: {TRAINING_HISTORY_PATH}")
+    log("Model training complete.")
 
 
 if __name__ == "__main__":
