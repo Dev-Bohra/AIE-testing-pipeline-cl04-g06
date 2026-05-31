@@ -15,7 +15,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 
 BASELINE_CSV = ROOT / "data" / "processed" / "bridge_processed.csv"
-UPDATED_DATA_PATH = ROOT / "data" / "raw_dataset" / "bridge_digital_twin_dataset_updated.csv"
+UPDATED_DATA_PATH = ROOT / "data" / "raw_dataset" / "bridge_digital_twin_dataset.csv"
 STATS_PATH = ROOT / "monitoring" / "alerts" / "sensor_stats.json"
 RESULTS_PATH = ROOT / "monitoring" / "alerts" / "anomaly_results.csv"
 LOG_PATH = ROOT / "monitoring" / "logs" / "anomaly_detection.log"
