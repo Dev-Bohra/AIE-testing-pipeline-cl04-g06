@@ -36,7 +36,6 @@ stages:
       - artifacts/data/y_test.npy
     outs:
       - artifacts/metrics/evaluation_metrics.json
-      - reports/performance_report.html
 
   monitor:
     cmd: python src/monitor.py
