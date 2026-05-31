@@ -1,0 +1,6 @@
+2026-05-30 23:21:02,669 - INFO - ============================================================
+2026-05-30 23:21:02,669 - INFO - MODEL EVALUATION
+2026-05-30 23:21:02,669 - INFO - ============================================================
+2026-05-30 23:21:03,292 - INFO - Evaluation metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0016, 'R2_Score': 0.9966}
+2026-05-30 23:21:03,294 - INFO - Evaluation metrics saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metrics\evaluation_metrics.json
+2026-05-30 23:21:03,294 - INFO - Evaluation complete.

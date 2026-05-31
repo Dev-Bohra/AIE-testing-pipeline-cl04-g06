@@ -38,3 +38,63 @@
 2026-05-30 22:58:21,537 - INFO - Best model saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\models\bridge_model.pkl
 2026-05-30 22:58:21,537 - INFO - Training history saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metrics\training_history.json
 2026-05-30 22:58:21,537 - INFO - Model training complete.
+2026-05-31 00:32:03,208 - INFO - ============================================================
+2026-05-31 00:32:03,208 - INFO - BRIDGE SHI MODEL TRAINING
+2026-05-31 00:32:03,208 - INFO - ============================================================
+2026-05-31 00:32:03,824 - INFO - Rows: 43200
+2026-05-31 00:32:03,824 - INFO - Features: 39
+2026-05-31 00:32:03,865 - INFO - Saved X_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_train.npy
+2026-05-31 00:32:03,865 - INFO - Saved X_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_test.npy
+2026-05-31 00:32:03,867 - INFO - Saved y_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_train.npy
+2026-05-31 00:32:03,867 - INFO - Saved y_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_test.npy
+2026-05-31 00:32:03,867 - INFO - Training Random Forest...
+2026-05-31 00:32:31,068 - INFO - Random Forest metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0016, 'R2_Score': 0.9966}
+2026-05-31 00:32:31,068 - INFO - Training Neural Network...
+2026-05-31 00:32:44,344 - INFO - Neural Network metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0017, 'R2_Score': 0.9965}
+2026-05-31 00:32:44,590 - INFO - Model version saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metadata\model_version.txt
+2026-05-31 00:32:45,246 - INFO - Model comparison plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\model_comparison.png
+2026-05-31 00:32:45,511 - INFO - Actual vs predicted plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\best_model_actual_vs_predicted.png
+2026-05-31 00:32:45,511 - INFO - Best model: RandomForestRegressor
+2026-05-31 00:32:45,511 - INFO - Best model saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\models\bridge_model.pkl
+2026-05-31 00:32:45,511 - INFO - Training history saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metrics\training_history.json
+2026-05-31 00:32:45,511 - INFO - Model training complete.
+2026-05-31 00:34:17,210 - INFO - ============================================================
+2026-05-31 00:34:17,211 - INFO - BRIDGE SHI MODEL TRAINING
+2026-05-31 00:34:17,211 - INFO - ============================================================
+2026-05-31 00:34:17,689 - INFO - Rows: 43200
+2026-05-31 00:34:17,689 - INFO - Features: 39
+2026-05-31 00:34:17,723 - INFO - Saved X_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_train.npy
+2026-05-31 00:34:17,723 - INFO - Saved X_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_test.npy
+2026-05-31 00:34:17,724 - INFO - Saved y_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_train.npy
+2026-05-31 00:34:17,724 - INFO - Saved y_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_test.npy
+2026-05-31 00:34:17,724 - INFO - Training Random Forest...
+2026-05-31 00:34:46,478 - INFO - Random Forest metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0016, 'R2_Score': 0.9966}
+2026-05-31 00:34:46,478 - INFO - Training Neural Network...
+2026-05-31 00:34:59,377 - INFO - Neural Network metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0017, 'R2_Score': 0.9965}
+2026-05-31 00:34:59,629 - INFO - Model version saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metadata\model_version.txt
+2026-05-31 00:35:00,008 - INFO - Model comparison plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\model_comparison.png
+2026-05-31 00:35:00,237 - INFO - Actual vs predicted plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\best_model_actual_vs_predicted.png
+2026-05-31 00:35:00,237 - INFO - Best model: RandomForestRegressor
+2026-05-31 00:35:00,237 - INFO - Best model saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\models\bridge_model.pkl
+2026-05-31 00:35:00,237 - INFO - Training history saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metrics\training_history.json
+2026-05-31 00:35:00,237 - INFO - Model training complete.
+2026-05-31 00:35:38,544 - INFO - ============================================================
+2026-05-31 00:35:38,544 - INFO - BRIDGE SHI MODEL TRAINING
+2026-05-31 00:35:38,544 - INFO - ============================================================
+2026-05-31 00:35:39,202 - INFO - Rows: 43200
+2026-05-31 00:35:39,202 - INFO - Features: 39
+2026-05-31 00:35:39,239 - INFO - Saved X_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_train.npy
+2026-05-31 00:35:39,239 - INFO - Saved X_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\X_test.npy
+2026-05-31 00:35:39,239 - INFO - Saved y_train to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_train.npy
+2026-05-31 00:35:39,241 - INFO - Saved y_test to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\data\y_test.npy
+2026-05-31 00:35:39,241 - INFO - Training Random Forest...
+2026-05-31 00:36:10,268 - INFO - Random Forest metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0016, 'R2_Score': 0.9966}
+2026-05-31 00:36:10,268 - INFO - Training Neural Network...
+2026-05-31 00:36:23,205 - INFO - Neural Network metrics: {'MSE': 0.0, 'RMSE': 0.0032, 'MAE': 0.0017, 'R2_Score': 0.9965}
+2026-05-31 00:36:23,477 - INFO - Model version saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metadata\model_version.txt
+2026-05-31 00:36:23,844 - INFO - Model comparison plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\model_comparison.png
+2026-05-31 00:36:24,110 - INFO - Actual vs predicted plot saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\reports\best_model_actual_vs_predicted.png
+2026-05-31 00:36:24,110 - INFO - Best model: RandomForestRegressor
+2026-05-31 00:36:24,110 - INFO - Best model saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\models\bridge_model.pkl
+2026-05-31 00:36:24,110 - INFO - Training history saved to: C:\Users\Dev Bohra\Desktop\applied-project-cl04_g06\artifacts\metrics\training_history.json
+2026-05-31 00:36:24,110 - INFO - Model training complete.

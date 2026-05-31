@@ -1,1 +1,0 @@
-rows=43200, columns=41
