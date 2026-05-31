@@ -44,8 +44,8 @@ stages:
       - data/processed/bridge_processed.csv
       - artifacts/metrics/evaluation_metrics.json
     outs:
-      - reports/drift_report.json
-      - reports/monitoring_dashboard.html
+      - monitoring/reports/drift_report.json
       - artifacts/metrics/monitoring_metrics.json
-      - monitoring/alerts/alert_history.txt
+      - monitoring/alerts/monitoring_alerts.txt
       - monitoring/logs/monitoring.log
+      - monitoring/logs/drift_detection.log
