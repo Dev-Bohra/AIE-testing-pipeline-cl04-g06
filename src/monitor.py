@@ -23,6 +23,7 @@ MONITORING_LOG_PATH = LOGS_DIR / "monitoring.log"
 DRIFT_LOG_PATH = LOGS_DIR / "drift_detection.log"
 
 DRIFT_REPORT_PATH = REPORTS_DIR / "drift_report.json"
+MONITORING_DASHBOARD_PATH = REPORTS_DIR / "monitoring_dashboard.html"
 ALERTS_PATH = ALERTS_DIR / "monitoring_alerts.txt"
 
 TARGET = "Structural_Health_Index_SHI"
@@ -161,6 +162,194 @@ def save_alerts(alerts):
             file.write(alert + "\n")
 
 
+
+
+def save_monitoring_dashboard(report, path):
+    data_quality = report.get("data_quality", {})
+    drift_results = report.get("drift_results", {})
+    alerts = report.get("alerts", [])
+
+    drifted_features = [
+        feature for feature, result in drift_results.items()
+        if result.get("drift_detected") is True
+    ]
+
+    total_features = len(drift_results)
+    drift_count = len(drifted_features)
+    drift_detected = drift_count > 0
+
+    status_label = "Drift Detected" if drift_detected else "Stable"
+    status_class = "danger" if drift_detected else "success"
+
+    rows = data_quality.get("rows", "N/A")
+    columns = data_quality.get("columns", "N/A")
+    missing_values = data_quality.get("missing_values", "N/A")
+    duplicate_rows = data_quality.get("duplicate_rows", "N/A")
+    quality_status = data_quality.get("status", "N/A")
+
+    drift_items = "".join(
+        f"<li>{feature} <span class='muted'>(p={drift_results[feature].get('p_value')}, KS={drift_results[feature].get('ks_statistic')})</span></li>"
+        for feature in drifted_features
+    )
+
+    if not drift_items:
+        drift_items = "<li>No major drifted features detected.</li>"
+
+    alert_items = "".join(f"<li>{alert}</li>" for alert in alerts)
+    if not alert_items:
+        alert_items = "<li>No active alerts.</li>"
+
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bridge Health Monitoring Dashboard</title>
+  <style>
+    body {{
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #1f2937;
+    }}
+    header {{
+      background: #111827;
+      color: white;
+      padding: 24px 40px;
+    }}
+    header h1 {{
+      margin: 0;
+      font-size: 28px;
+    }}
+    header p {{
+      margin: 8px 0 0;
+      color: #d1d5db;
+    }}
+    .container {{
+      padding: 30px 40px;
+    }}
+    .cards {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }}
+    .card {{
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }}
+    .card h2 {{
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #6b7280;
+    }}
+    .value {{
+      font-size: 30px;
+      font-weight: bold;
+      margin: 0;
+    }}
+    .success {{
+      color: #059669;
+    }}
+    .danger {{
+      color: #dc2626;
+    }}
+    .section {{
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }}
+    ul {{
+      columns: 2;
+      line-height: 1.8;
+    }}
+    .muted {{
+      color: #6b7280;
+      font-size: 13px;
+    }}
+    .footer {{
+      color: #6b7280;
+      font-size: 13px;
+      margin-top: 20px;
+    }}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bridge Structural Health Monitoring Dashboard</h1>
+    <p>Generated automatically from the DVC monitoring stage.</p>
+  </header>
+
+  <div class="container">
+    <div class="cards">
+      <div class="card">
+        <h2>Monitoring Status</h2>
+        <p class="value {status_class}">{status_label}</p>
+      </div>
+      <div class="card">
+        <h2>Features Checked</h2>
+        <p class="value">{total_features}</p>
+      </div>
+      <div class="card">
+        <h2>Drifted Features</h2>
+        <p class="value danger">{drift_count}</p>
+      </div>
+      <div class="card">
+        <h2>Data Quality</h2>
+        <p class="value {status_class if quality_status != 'PASS' else 'success'}">{quality_status}</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h2>Rows</h2>
+        <p class="value">{rows}</p>
+      </div>
+      <div class="card">
+        <h2>Columns</h2>
+        <p class="value">{columns}</p>
+      </div>
+      <div class="card">
+        <h2>Missing Values</h2>
+        <p class="value">{missing_values}</p>
+      </div>
+      <div class="card">
+        <h2>Duplicate Rows</h2>
+        <p class="value">{duplicate_rows}</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Detected Drift Features</h2>
+      <ul>
+        {drift_items}
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Monitoring Alerts</h2>
+      <ul>
+        {alert_items}
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Pipeline Summary</h2>
+      <p>This dashboard summarises the monitoring output for the AI-based bridge structural health monitoring pipeline.</p>
+      <p>The pipeline includes preprocessing, model training, evaluation, drift monitoring, and artefact tracking through DVC.</p>
+      <p class="footer">Dashboard file: monitoring/reports/monitoring_dashboard.html</p>
+    </div>
+  </div>
+</body>
+</html>"""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(html, encoding="utf-8")
+
+
 def main():
     log("=" * 60)
     log("BRIDGE MONITORING")
@@ -185,10 +374,12 @@ def main():
 
     save_json(monitoring_report, DRIFT_REPORT_PATH)
     save_json(monitoring_report, METRICS_PATH)
+    save_monitoring_dashboard(monitoring_report, MONITORING_DASHBOARD_PATH)
     save_alerts(alerts)
 
     log(f"Monitoring metrics saved to: {METRICS_PATH}")
     log(f"Drift report saved to: {DRIFT_REPORT_PATH}")
+    log(f"Monitoring dashboard saved to: {MONITORING_DASHBOARD_PATH}")
     log(f"Alerts saved to: {ALERTS_PATH}")
 
     for alert in alerts:

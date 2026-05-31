@@ -117,8 +117,8 @@ stages:
       size: 32233708
     - path: src/monitor.py
       hash: md5
-      md5: d7f91a17e3b7f9e78d59117f7b874d4b
-      size: 5490
+      md5: 08ed1f5a6904914c1e8a580e18facbc6
+      size: 10531
     outs:
     - path: artifacts/metrics/monitoring_metrics.json
       hash: md5
@@ -130,13 +130,17 @@ stages:
       size: 818
     - path: monitoring/logs/drift_detection.log
       hash: md5
-      md5: 49275b8d94fe3ac6046d18cef60b6008
+      md5: 5aa629df7dbd746527b9ef62d1b537f0
       size: 3492
     - path: monitoring/logs/monitoring.log
       hash: md5
-      md5: 5f814b59e39bf5794f2d3f0ced47246d
-      size: 5128
+      md5: ec6369362f48588f6b89ef9ba5dc3115
+      size: 5303
     - path: monitoring/reports/drift_report.json
       hash: md5
       md5: 88b1c11b5d2a058f04ebbcc2593c9cfa
       size: 7049
+    - path: monitoring/reports/monitoring_dashboard.html
+      hash: md5
+      md5: 2a30da1614c0fb5c6c2edd25ecdf603e
+      size: 6626

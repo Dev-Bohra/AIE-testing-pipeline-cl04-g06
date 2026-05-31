@@ -45,6 +45,7 @@ stages:
       - artifacts/metrics/evaluation_metrics.json
     outs:
       - monitoring/reports/drift_report.json
+      - monitoring/reports/monitoring_dashboard.html
       - artifacts/metrics/monitoring_metrics.json
       - monitoring/alerts/monitoring_alerts.txt
       - monitoring/logs/monitoring.log
