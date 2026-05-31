@@ -5,3 +5,21 @@ __pycache__/
 .env
 .dvc/tmp/
 .dvc/config.local
+
+# DVC generated artefacts
+artifacts/data/*
+artifacts/metadata/*
+artifacts/preprocessing/*
+artifacts/models/*
+artifacts/metrics/*
+data/cleaned/*
+data/processed/*
+reports/*.png
+
+# Keep folder placeholders / DVC ignore rules if needed
+!artifacts/**/.gitkeep
+!artifacts/**/.gitignore
+!data/**/.gitkeep
+!data/**/.gitignore
+!reports/.gitkeep
+!reports/.gitignore
